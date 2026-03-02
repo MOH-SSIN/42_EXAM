@@ -17,7 +17,8 @@ tree_bag &tree_bag::operator=(const tree_bag &other) {
 	return *this;
 }
 
-tree_bag::~tree_bag() {
+tree_bag::~tree_bag()
+{
 	this->destroy_tree(this->tree);
 }
 

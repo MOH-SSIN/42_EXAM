@@ -38,3 +38,12 @@ private:
 
 
 #endif //EXAM_ASSIGNMENTS_TREE_BAG_HPP
+
+/* 
+
+	NULL
+
+	5
+
+
+ */
