@@ -3,7 +3,7 @@
 //0
 unsigned long long bigint::StringToNull(const std::string &str) const
 {
-    unsigned long long result;
+    unsigned long long result = 0;// nsit mdrtch inisialisation par 0 aux debut 
     for (std::string::size_type i  = 0; i < str.size(); i++)
     {
         char c = str[i];
@@ -25,7 +25,7 @@ std::string bigint::add_string(const std::string &num1, const std::string &num2)
 {
     std::string result;
     int i = num1.size() - 1;   
-    int j = num1.size() - 1;
+    int j = num2.size() - 1;//ici drt num1 
     int carry = 0 ;
 
     while (i >= 0 || j >= 0 || carry)
@@ -49,7 +49,7 @@ bigint::bigint() : value("0") {}
 
 bigint::bigint(unsigned long long num): value(std::to_string(num)){}
 
-bigint::bigint(const std::string &str)
+bigint::bigint(const std::string &str) : value(str) // insit ": value(str)"
 {
     remove_zeros();
 }

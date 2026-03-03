@@ -1,9 +1,14 @@
 #ifndef BIGINT_HPP
 #define BIGINT_HPP
 
+// #include <iostream>
+// #include <string>
+// #include <algorithm>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <algorithm>
+#include <stdexcept>
 
 
 class bigint
