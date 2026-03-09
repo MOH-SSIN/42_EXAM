@@ -28,10 +28,6 @@ int sstrlen(char *s)
     return p - s;
 }
 
-void f()
-{
-    system("leaks a.out");
-}
 
 int main(int ac, char **av)
 {
