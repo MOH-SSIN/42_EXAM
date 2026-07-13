@@ -29,22 +29,30 @@
 
 
 
-
+//0
 searchable_tree_bag::searchable_tree_bag():tree_bag(){}
+
 searchable_tree_bag::searchable_tree_bag(const searchable_tree_bag &other):tree_bag(other){}
-searchable_tree_bag &searchable_tree_bag::operator=(const searchable_tree_bag &other){
+
+searchable_tree_bag &searchable_tree_bag::operator=(const searchable_tree_bag &other)
+{
 	if (this != &other){
 		tree_bag::operator=(other);
 	}
 	return *this;
 }
+
 searchable_tree_bag::~searchable_tree_bag(){}
 
-bool searchable_tree_bag::has(int val) const{
+//1
+bool searchable_tree_bag::has(int val) const
+{
 	return search_tree(tree, val);
 }
 
-bool searchable_tree_bag::search_tree(node *n, int val) const{
+//2
+bool searchable_tree_bag::search_tree(node *n, int val) const
+{
 	if (n == NULL)
 		return false;
 	if (n->value == val)

@@ -39,17 +39,20 @@
 #include "tree_bag.hpp"
 #include "searchable_bag.hpp"
 
-class searchable_tree_bag : public tree_bag, public searchable_bag {
-public:
-	searchable_tree_bag(); 
-	searchable_tree_bag(const searchable_tree_bag &other); 
-	searchable_tree_bag &operator=(const searchable_tree_bag &other); 
-	~searchable_tree_bag(); 
+class searchable_tree_bag : public tree_bag, public searchable_bag
+{
+	public:
+	//0
+		searchable_tree_bag(); 
+		searchable_tree_bag(const searchable_tree_bag &other); 
+		searchable_tree_bag &operator=(const searchable_tree_bag &other); 
+		~searchable_tree_bag(); 
+	//1
+		bool has(int val) const;
 
-	bool has(int val) const;
-
-private:
-	bool search_tree(node *n, int val) const;
+	private:
+	//2
+		bool search_tree(node *n, int val) const;
 };
 
 #endif

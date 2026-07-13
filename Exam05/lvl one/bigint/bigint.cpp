@@ -1,6 +1,8 @@
 #include "bigint.hpp"
 
-std::string bigint::addStrings(const std::string &num1, const std::string &num2) const {
+//0
+std::string bigint::add_string(const std::string &num1, const std::string &num2) const
+{
 	std::string result;
 	int carry = 0;
 	int i = num1.size() - 1;
@@ -19,7 +21,9 @@ std::string bigint::addStrings(const std::string &num1, const std::string &num2)
 	std::reverse(result.begin(), result.end());
 	return result;
 }
-unsigned long long bigint::stringToULL(const std::string &str) const {
+
+unsigned long long bigint::String_to_Ull(const std::string &str) const
+{
 	unsigned long long result = 0;
 	for (std::string::size_type i = 0; i < str.size(); ++i)
 	{
@@ -30,21 +34,23 @@ unsigned long long bigint::stringToULL(const std::string &str) const {
 	}
 	return result;
 }
-void bigint::removeLeadingZeros() {
+
+void bigint::remove_zeros()
+{
 	while (value.size() > 1 && value[0] == '0')
 		value.erase(0,1);
 }
 
-
+//1
 bigint::bigint() : value ("0") {}
 bigint::bigint(unsigned long long num) : value(std::to_string(num)) {}
 bigint::bigint(const std::string &str) : value(str)
 {
-	removeLeadingZeros();
+	remove_zeros();
 }
 bigint::bigint(const bigint& other) : value(other.value) {}
 
-
+//2
 bigint& bigint::operator=(const bigint& other)
 {
 	if (this != &other)
@@ -52,47 +58,62 @@ bigint& bigint::operator=(const bigint& other)
 	return *this;
 }
 
-
-bigint bigint::operator+(const bigint& other) const {
-	return bigint(addStrings(value, other.value));
+//3
+bigint bigint::operator+(const bigint& other) const
+{
+	return bigint(add_string(value, other.value));
 }
-bigint bigint::operator+(unsigned long long num) const {
+
+bigint bigint::operator+(unsigned long long num) const
+{
 	return *this + bigint(num);
 }
-bigint& bigint::operator+=(const bigint& other) {
-	value = addStrings(value, other.value);
+
+bigint& bigint::operator+=(const bigint& other)
+{
+	value = add_string(value, other.value);
 	return *this;
 }
-bigint& bigint::operator+=(unsigned long long num) {
+
+bigint& bigint::operator+=(unsigned long long num)
+{
 	return *this += bigint(num);
 }
 
-
-bigint& bigint::operator++() {
+//4
+bigint& bigint::operator++()
+{
 	*this +=1;
 	return *this;
 }
-bigint bigint::operator++(int) {
+
+bigint bigint::operator++(int)
+{
 	bigint temp(*this);
 	++(*this);
 	return temp;
 }
 
-
-bigint bigint::operator<<(int shift) const {
+//5
+bigint bigint::operator<<(int shift) const
+{
 	if (shift <= 0)
 		return *this;
 	return bigint(value + std::string(shift, '0'));
 }
-bigint bigint::operator>>(int shift) const {
+
+bigint bigint::operator>>(int shift) const
+{
 	if (shift <= 0 || shift >= static_cast<int>(value.size()))
 		return bigint(0);
 	return bigint(value.substr(0, value.size() - shift));
 }
-bigint& bigint::operator<<=(int shift) {
+
+bigint& bigint::operator<<=(int shift)
+{
 	if (shift > 0)
 		value += std::string(shift, '0');
-	removeLeadingZeros();
+	remove_zeros();
 	return *this;
 }
 bigint& bigint::operator>>=(int shift) {
@@ -100,50 +121,69 @@ bigint& bigint::operator>>=(int shift) {
 		value = "0";
 	else
 		value = value.substr(0, value.size() - shift);
-	removeLeadingZeros();
+	remove_zeros();
 	return *this;
 }
 
-
-bigint bigint::operator<<(const bigint& shift) const {
-	return *this << stringToULL(shift.value);
-}
-bigint bigint::operator>>(const bigint& shift) const {
-	return *this >> stringToULL(shift.value);
-}
-bigint& bigint::operator<<=(const bigint& shift) {
-	removeLeadingZeros();
-	return *this <<= stringToULL(shift.value);
-}
-bigint& bigint::operator>>=(const bigint& shift) {
-	removeLeadingZeros();
-	return *this >>= stringToULL(shift.value);
+//6
+bigint bigint::operator<<(const bigint& shift) const
+{
+	return *this << String_to_Ull(shift.value);
 }
 
+bigint bigint::operator>>(const bigint& shift) const
+{
+	return *this >> String_to_Ull(shift.value);
+}
 
-bool bigint::operator<(const bigint& other) const {
+bigint& bigint::operator<<=(const bigint& shift)
+{
+	remove_zeros();
+	return *this <<= String_to_Ull(shift.value);
+}
+
+bigint& bigint::operator>>=(const bigint& shift)
+{
+	remove_zeros();
+	return *this >>= String_to_Ull(shift.value);
+}
+
+//7
+bool bigint::operator<(const bigint& other) const
+{
 	if (value.size() != other.value.size())
 		return value.size() < other.value.size();
 	return value < other.value;
 }
-bool bigint::operator>(const bigint& other) const {
+
+bool bigint::operator>(const bigint& other) const
+{
 	return other < *this;
 }
-bool bigint::operator<=(const bigint& other) const {
+
+bool bigint::operator<=(const bigint& other) const
+{
 	return !(other < *this);
 }
-bool bigint::operator>=(const bigint& other) const {
+
+bool bigint::operator>=(const bigint& other) const
+{
 	return !(*this < other);
 }
-bool bigint::operator==(const bigint& other) const {
+
+bool bigint::operator==(const bigint& other) const
+{
 	return value == other.value;
 }
-bool bigint::operator!=(const bigint& other) const {
+
+bool bigint::operator!=(const bigint& other) const
+{
 	return value != other.value;
 }
 
-
-std::ostream& operator<<(std::ostream& os, const bigint& bi) {
+//8
+std::ostream& operator<<(std::ostream& os, const bigint& bi)
+{
 	os << bi.value;
 	return os;
 }
