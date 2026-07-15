@@ -1,8 +1,11 @@
-//==========================================
-// hadchi at lqah f wahd file smitu main.c f subject folder
-// copih o 7etu 3ndk f file smitu mini_serv.c
-// west folder smitu mini_serv
-//==========================================
+/*
+	||=========================================================================||
+	|| Tu trouveras ça dans un fichier nommé main.c dans le dossier subject.   ||
+	|| Copie-le et mets-le dans un fichier nommé mini_serv.c,	    	       ||
+	|| à l'intérieur du dossier mini_serv.                                     ||
+	||=========================================================================||
+*/
+
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
@@ -60,10 +63,10 @@ char *str_join(char *buf, char *add)
 	return (newbuf);
 }
 
-//==========================================
-// ghtktbe hdchi
-//==========================================
-
+/*  ||====================|| 
+	|| Tu vas écrire ça . ||
+	||====================||
+*/
 
 int fdMax, fdID = 0;
 int fds[10];
