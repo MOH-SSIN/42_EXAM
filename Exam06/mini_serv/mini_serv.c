@@ -119,17 +119,20 @@ void _sendMessage(int senderFd) {
 	}
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 	int sockfd, connfd;
 	unsigned int len;
 	struct sockaddr_in servaddr, cli;
 
 	// (void) argv;
-	if (argc != 2) _error("Wrong number of arguments");
+	if (argc != 2)
+		_error("Wrong number of arguments");
 
 	// socket create and verification
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd == -1) _error("Fatal error");
+	if (sockfd == -1)
+		_error("Fatal error");
 	bzero(&servaddr, sizeof(servaddr));
 
 	// assign IP, PORT
@@ -140,6 +143,7 @@ int main(int argc, char **argv) {
 	// Binding newly created socket to given IP and verification
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
 		_error("Fatal error");
+
 	if (listen(sockfd, 10) != 0) _error("Fatal error");
 
 	FD_ZERO(&allFds);
@@ -156,7 +160,6 @@ int main(int argc, char **argv) {
         {
 			if (FD_ISSET(fd, &readFds))
             {
-
 				if (fd == sockfd)
                 {
 
@@ -166,8 +169,9 @@ int main(int argc, char **argv) {
 					_addClient(connfd);
 					break;
 
-				} else
-                {	
+				}
+				else
+                {
 					int n = recv(fd, &buffer, 99, 0);
 					if (n <= 0)
 						_removeClient(fd);
@@ -181,6 +185,5 @@ int main(int argc, char **argv) {
 				}
 			}
 		}
-
 	}
 }
