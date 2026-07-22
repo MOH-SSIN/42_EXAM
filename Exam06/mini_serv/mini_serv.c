@@ -83,7 +83,8 @@ void _error(char *str)
 
 void _broadcast(int senderFd, char *str)
 {
-	for (int fd = 0; fd <= fdMax; fd++) {
+	for (int fd = 0; fd <= fdMax; fd++)
+	{
 		if (FD_ISSET(fd, &writeFds) && fd != senderFd)
 			send(fd, str, strlen(str), 0);
 	}
@@ -125,7 +126,6 @@ int main(int argc, char **argv)
 	unsigned int len;
 	struct sockaddr_in servaddr, cli;
 
-	// (void) argv;
 	if (argc != 2)
 		_error("Wrong number of arguments");
 
@@ -144,7 +144,8 @@ int main(int argc, char **argv)
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0)
 		_error("Fatal error");
 
-	if (listen(sockfd, 10) != 0) _error("Fatal error");
+	if (listen(sockfd, 10) != 0)
+		_error("Fatal error");
 
 	FD_ZERO(&allFds);
 	FD_SET(sockfd, &allFds);
